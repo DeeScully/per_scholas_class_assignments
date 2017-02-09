@@ -9,7 +9,7 @@ def greet():
     print('%s sounds yummy, %s' %(fave_food, name))
 
     end_game = input('%s, do you have to go?' %name)
-    if end_game == 'no':
+    if end_game.lower() == 'no':
         greet()
 
 greet()
