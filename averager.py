@@ -11,4 +11,4 @@ for i in range(1, num_of_nums + 1):
 
 average = tally / num_of_nums
 
-print('You inputted %d numbers and the average is %f' %(num_of_nums, average))
+print('You inputted %s numbers and the average is %s' %(num_of_nums, average))
