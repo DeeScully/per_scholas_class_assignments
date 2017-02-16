@@ -1,5 +1,5 @@
 import random
-num_range = 11
+max_num = 10
 secret_num = 0
 guesses_left = 0
 game_over = False
@@ -7,7 +7,7 @@ game_over = False
 def new_game():
     global secret_num, guesses_left
 
-    secret_num = random.randrange(num_range)
+    secret_num = random.randint(1, max_num)
     guesses_left = 3
     print('Let\'s play a game.  You have three guesses to guess my secret number.  It will be between 1-10.')
     guess = input_guess()
