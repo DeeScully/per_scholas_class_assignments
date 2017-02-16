@@ -1,42 +1,58 @@
 import random
-
-my_num = random.random() * 10
-guess_num = 3
+num_range = 11
+secret_num = 0
+guesses_left = 0
 game_over = False
 
-def wrong_guess():
-    global guess_num
-    guess_num -= 1
+def new_game():
+    global secret_num, guesses_left
 
-def valid_num():
-    valid_input = False
+    secret_num = random.randrange(num_range)
+    guesses_left = 3
+    print('Let\'s play a game.  You have three guesses to guess my secret number.  It will be between 1-10.')
+    guess = input_guess()
+    return secret_num
 
-    while not valid_input:
+def input_guess():
+    global guesses_left, game_over
+
+    invalid = True
+    while invalid:
         try:
-            guess = int(input('What is your guess?  Please type an integer from 1 to 10.'))
-            valid_input = True
+            guess_str = input('What is your guess?')
+            guess_int = int(guess_str)
+
         except:
-            print('You did not input a valid integer.  Please try again.')
+            print('You did not input an integer.  Please try again.')
+            continue
 
-print('Let\'s play a game.  I have a number from 1 to 10.  You try to guess what it is!')
+        if guess_int < 1 or guess_int > 10:
+            print('Your number is outside the valid range.  Please try again.')
+            continue
 
-while not game_over and guess_num > 0:
-    if valid_num() == my_num:
+        invalid = False
+
+    print('Your guess was: %d' %(guess_int))
+
+    if guess_int == secret_num:
         print('That\'s right.  You WIN!')
         game_over = True
-    elif valid_num() == my_num + 1 or valid_num() == my_num - 1:
+    elif (guess_int == secret_num + 1 or guess_int == secret_num - 1) and guesses_left > 1:
         print('You\'re HOOOOOT.')
-        wrong_guess()
-    elif valid_num() == my_num + 2 or valid_num() == my_num - 2:
-        print('You\'re warm.')
-        wrong_guess()
+        guesses_left -= 1
+    elif (guess_int == secret_num + 2 or guess_int == secret_num - 2) and guesses_left > 1:
+        print('You\'re Warm.')
+        guesses_left -= 1
+    elif guesses_left > 1:
+        print('You\'re Coooooold.')
+        guesses_left -= 1
     else:
-        print('You\'re cold.')
-        wrong_guess()
+        print('Ohhh that\'s wrong.  The secret number was %d.' %(secret_num))
+        game_over = True
 
-
-
-
+new_game()
+while not game_over:
+    input_guess()
 
 
 
