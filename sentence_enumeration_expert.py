@@ -29,6 +29,7 @@ def is_word(word_list):
             return True
 
 
+
 def is_sentence(word_list):
     global min_words_in_sentence, max_words_in_sentence
     print('is sentence word list is', word_list)
@@ -68,9 +69,10 @@ while len(text) > 0:
     #print('list after splitting', temp_list)
     temp_word_list = list()
 
-    if is_word(temp_list):
-        temp_word_list.append(i)
-        words_count += 1
+    for i in temp_list:
+        if is_word(temp_list):
+            temp_word_list.append(i)
+            words_count += 1
 
     if is_sentence(temp_word_list):
         #print('this is a sentence')
@@ -89,8 +91,6 @@ while len(text) > 0:
         text = text[min_index:]
 
 input('Press enter to exit the program.')
-
-
 
 
 
