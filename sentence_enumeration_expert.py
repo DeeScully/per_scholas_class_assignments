@@ -59,36 +59,42 @@ def punctuation_index(text):
 with open(fname) as fh:
     text = fh.read()
 
-while len(text) > 0:
-    min_index = punctuation_index(text)
-    temp_text = text[:min_index]
-    print('text before splitting', temp_text)
-    temp_list = temp_text.split()
-    #print('list after splitting', temp_list)
-    temp_word_list = list()
+text_chk = True
+while text_chk:
+    if len(text) > 0:
+        min_index = punctuation_index(text)
+        print('min_index is', min_index)
+        print('len txt is', len(text))
+        temp_text = text[:min_index]
+        print('text before splitting', temp_text)
+        temp_list = temp_text.split()
+        #print('list after splitting', temp_list)
+        temp_word_list = list()
 
-    for i in temp_list:
-        if is_word(i):
-            temp_word_list.append(i)
-            print('temp word list is', temp_word_list)
-            words_count += 1
-            print('word count is', words_count)
+        for i in temp_list:
+            if is_word(i):
+                temp_word_list.append(i)
+                #print('temp word list is', temp_word_list)
+                words_count += 1
+                #print('word count is', words_count)
 
-    if is_sentence(temp_word_list):
-        #print('temp word list is', temp_word_list)
-        #print('this is a sentence')
-        sentences_count += 1
+        if is_sentence(temp_word_list):
+            #print('temp word list is', temp_word_list)
+            #print('this is a sentence')
+            sentences_count += 1
 
+        if min_index == len(text):
+            if text[-1] not in punctuations and is_sentence(temp_word_list):
+                sentences_count -= 1
 
-    if min_index == len(text):
-        if text[-1] not in punctuations and is_sentence(temp_word_list):
-            sentences_count -= 1
+            counter(words_count, sentences_count)
+            text_chk = False
 
-        counter(words_count, sentences_count)
-        text = ''
-
+        else:
+            text = text[min_index + 1:]
     else:
-        text = text[min_index + 1:]
+        counter(words_count, sentences_count)
+        text_chk = False
 
 input('Press enter to exit the program.')
 
