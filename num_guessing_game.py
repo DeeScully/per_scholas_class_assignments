@@ -1,4 +1,4 @@
-import random
+import random as rand
 max_num = 10
 secret_num = 0
 guesses_left = 0
@@ -7,10 +7,9 @@ game_over = False
 def new_game():
     global secret_num, guesses_left
 
-    secret_num = random.randint(1, max_num)
+    secret_num = rand.randint(1, max_num)
     guesses_left = 3
     print('Let\'s play a game.  You have three guesses to guess my secret number.  It will be between 1-10.')
-    guess = input_guess()
     return secret_num
 
 def input_guess():
@@ -37,10 +36,10 @@ def input_guess():
     if guess_int == secret_num:
         print('That\'s right.  You WIN!')
         game_over = True
-    elif (guess_int == secret_num + 1 or guess_int == secret_num - 1) and guesses_left > 1:
+    elif (abs(guess_int - secret_num) == 1) and guesses_left > 1:
         print('You\'re HOOOOOT.')
         guesses_left -= 1
-    elif (guess_int == secret_num + 2 or guess_int == secret_num - 2) and guesses_left > 1:
+    elif (abs(guess_int - secret_num) == 2) and guesses_left > 1:
         print('You\'re Warm.')
         guesses_left -= 1
     elif guesses_left > 1:
