@@ -32,7 +32,7 @@ def is_sentence(word_list):
     global min_words_in_sentence, max_words_in_sentence
     #print('is sentence word list is', word_list)
 
-    if min_words_in_sentence <= len(word_list) and len(word_list) <= max_words_in_sentence:
+    if min_words_in_sentence <= len(word_list) <= max_words_in_sentence:
         return True
 
 
@@ -63,10 +63,10 @@ text_chk = True
 while text_chk:
     if len(text) > 0:
         min_index = punctuation_index(text)
-        print('min_index is', min_index)
-        print('len txt is', len(text))
+        #print('min_index is', min_index)
+        #print('len txt is', len(text))
         temp_text = text[:min_index]
-        print('text before splitting', temp_text)
+        #print('text before splitting', temp_text)
         temp_list = temp_text.split()
         #print('list after splitting', temp_list)
         temp_word_list = list()
